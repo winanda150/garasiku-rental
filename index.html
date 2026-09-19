@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garasiku - Sewa Garasi Nyaman &amp; Terpercaya</title>
+    <meta name="description"
+        content="Sewa garasi mobil terpercaya, beratap teduh, nyaman dan terlindung dari panas dan hujan, dengan akses jalan leluasa dan sewa bulanan praktis.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="public/branding/garasiku%20logo.ico">
+    <link rel="shortcut icon" href="public/branding/garasiku%20logo.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Pastikan selalu kembali ke posisi paling atas saat halaman di-refresh -->
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname + window.location.search);
+        }
+        window.scrollTo(0, 0);
+    </script>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         HEADER KOMPONEN
+         ========================================== -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container">
+
+            <!-- 1. Pojok Kiri: Logo + Garasiku (#0037B0) + Tagline -->
+            <a href="#beranda" class="header-brand" id="headerBrand" aria-label="Beranda Garasiku">
+                <img src="public/branding/garasiku%20logo.webp" alt="Logo Garasiku" class="brand-logo" id="brandLogo">
+                <div class="brand-text-wrapper">
+                    <span class="brand-name" id="brandName">Garasiku</span>
+                    <span class="brand-tagline" id="brandTagline">SEWA GARASI NYAMAN &amp; TERPECAYA</span>
+                </div>
+            </a>
+
+            <!-- 2. Di Tengah: Navbar ke Halaman (Desktop Only - Dihilangkan di Mobile) -->
+            <nav class="header-nav" id="headerNav" aria-label="Navigasi Utama">
+                <ul class="nav-menu">
+                    <li><a href="#beranda" class="nav-link active" id="navHome">Beranda</a></li>
+                    <li><a href="#tentang" class="nav-link" id="navAbout">Tentang</a></li>
+                    <li><a href="#unit-garasi" class="nav-link" id="navGarageTypes">Unit Garasi</a></li>
+                    <li><a href="#fasilitas" class="nav-link" id="navFeatures">Fasilitas</a></li>
+                    <li><a href="#cara-sewa" class="nav-link" id="navHowItWorks">Cara Sewa</a></li>
+                    <li><a href="#bantuan" class="nav-link" id="navHelp">Bantuan</a></li>
+                </ul>
+            </nav>
+
+            <!-- 3. Pojok Kanan: Box Berwarna #006C49 (Desktop) & Hamburger Button (Mobile) -->
+            <div class="header-action" id="headerAction">
+                <a href="#sewa" class="action-box desktop-action-box" id="btnSewaGarasi" aria-label="+ Sewa Garasi">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    <span>Sewa Garasi</span>
+                </a>
+
+                <!-- Hamburger Button (Pojok Kanan Khusus Mobile) -->
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Buka menu navigasi" aria-expanded="false"
+                    aria-controls="mobileNavMenu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Mobile Navigation Menu (Muncul saat hamburger ditekan) -->
+        <div class="mobile-nav-menu" id="mobileNavMenu" inert>
+            <div class="mobile-nav-container">
+                <div class="mobile-nav-header">
+                    <span class="mobile-nav-heading">Navigasi Halaman</span>
+                </div>
+                <ul class="mobile-nav-list">
+                    <li><a href="#beranda" class="mobile-nav-link active"><span>Beranda</span><span
+                                class="chevron">›</span></a></li>
+                    <li><a href="#tentang" class="mobile-nav-link"><span>Tentang</span><span
+                                class="chevron">›</span></a></li>
+                    <li><a href="#unit-garasi" class="mobile-nav-link"><span>Unit Garasi</span><span
+                                class="chevron">›</span></a></li>
+                    <li><a href="#fasilitas" class="mobile-nav-link"><span>Fasilitas Garasi</span><span
+                                class="chevron">›</span></a></li>
+                    <li><a href="#cara-sewa" class="mobile-nav-link"><span>Cara Sewa</span><span
+                                class="chevron">›</span></a></li>
+                    <li><a href="#bantuan" class="mobile-nav-link"><span>Pusat Bantuan</span><span
+                                class="chevron">›</span></a></li>
+                </ul>
+                <div class="mobile-nav-footer">
+                    <p class="mobile-footer-text">Siap parkir mobil lebih nyaman?</p>
+                    <a href="#sewa" class="mobile-contact-btn" id="btnMobileSewaGarasi" aria-label="+ Sewa Garasi">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        <span>Sewa Garasi</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Backdrop Overlay saat menu mobile aktif -->
+        <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    </header>
+
+    <!-- ==========================================
+         HERO PREVIEW SECTION
+         (Pratinjau Halaman Bisnis Sewa Garasi)
+         ========================================== -->
+    <main>
+        <section class="hero-section" id="beranda">
+            <div class="hero-badge-container">
+                <div class="hero-pill">
+                    <span>Solusi Sewa Garasi Mobil Nyaman &amp; Terpercaya</span>
+                </div>
+            </div>
+
+            <h1 class="hero-title">
+                Sewa <span class="highlight-blue">Garasi Mobil</span> Nyaman, Teduh &amp; <span
+                    class="highlight-green">Terpercaya</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Lindungi mobil kesayangan Anda dari terik matahari dan guyuran hujan. Tempat parkir beratap yang teduh,
+                bersih, lingkungan tenang, dan akses jalan lebar yang memudahkan mobilitas Anda setiap hari.
+            </p>
+
+            <!-- Tombol Aksi Hero (Horizontal) -->
+            <div class="hero-cta-group">
+                <a href="https://wa.me/6281916783714?text=Halo%20Pak%20Wayan,%20saya%20ingin%20tanya%20sewa%20garasi%20mobil"
+                    target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                    </svg>
+                    <span>Chat dengan pengelola</span>
+                </a>
+
+                <a href="#unit-garasi" class="btn-hero btn-hero-slots">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 4v16M15 4v16M4 10h16M4 15h16" />
+                    </svg>
+                    <span>Lihat garasi &amp; slot garasi</span>
+                </a>
+            </div>
+
+            <!-- Preview Card Layanan -->
+            <h2 class="sr-only">Keunggulan Layanan Garasiku</h2>
+            <div class="preview-grid">
+                <div class="preview-card theme-blue">
+                    <div class="card-icon blue">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Garasi Beratap &amp; Teduh</h3>
+                    <p>Mobil terlindung dari terik matahari, hujan lebat, dan kotoran debu sehingga cat mobil tetap
+                        bersih
+                        dan terawat.</p>
+                </div>
+
+                <div class="preview-card theme-green">
+                    <div class="card-icon green">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                            <line x1="9" y1="5" x2="9" y2="19"></line>
+                            <line x1="15" y1="5" x2="15" y2="19"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                        </svg>
+                    </div>
+                    <h3>Akses Pagar Praktis</h3>
+                    <p>Garasi dilengkapi pagar yang dapat langsung dibuka dan ditutup sendiri dengan mudah, bebas
+                        keluar-masuk mobil kapan saja tanpa repot.</p>
+                </div>
+
+                <div class="preview-card theme-amber">
+                    <div class="card-icon amber">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Akses Jalan Lebar</h3>
+                    <p>Lokasi berada di jalan perumahan yang leluasa, memudahkan manuver keluar-masuk mobil tanpa rasa
+                        khawatir.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: TENTANG GARASIKU & PENGELOLA
+             ========================================== -->
+        <section class="content-section bg-alt" id="tentang">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Mengenal Pengelola Garasi</span>
+                    <h2 class="section-title">Dikelola Sepenuh Hati untuk Kenyamanan Kendaraan Anda</h2>
+                    <p class="section-subtitle">Garasiku lahir dari kepedulian tulus untuk menghadirkan tempat parkir
+                        yang aman, beratap teduh, dan ramah seperti di rumah sendiri.</p>
+                </div>
+
+                <div class="about-grid">
+                    <!-- Kolom Kiri: Foto Pengelola & Floating Trust Badges -->
+                    <div class="about-media">
+                        <div class="about-image-wrapper">
+                            <img src="public/branding/pengelola_garasi.jpg"
+                                alt="Foto Wajah Pak Wayan - Pengelola Garasiku" class="about-manager-img" width="480"
+                                height="640" loading="lazy">
+
+                            <!-- Floating Trust Badge Atas -->
+                            <div class="about-badge-floating badge-top">
+                                <div class="badge-icon-wrap badge-shield">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                        <path d="m9 12 2 2 4-4"></path>
+                                    </svg>
+                                </div>
+                                <div class="badge-text-wrap">
+                                    <span class="badge-label">Pengelola Resmi</span>
+                                    <strong class="badge-val">Terpercaya &amp; Bertanggung Jawab</strong>
+                                </div>
+                            </div>
+
+                            <!-- Floating Trust Badge Bawah -->
+                            <div class="about-badge-floating badge-bottom">
+                                <div class="badge-icon-wrap badge-location">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                </div>
+                                <div class="badge-text-wrap">
+                                    <span class="badge-label">Lokasi Domisili</span>
+                                    <strong class="badge-val">Warga Komplek Setempat</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolom Kanan: Narasi Cerita, 3 Pilar Nilai & Personal Quote -->
+                    <div class="about-story">
+                        <div class="about-lead">
+                            <p>
+                                <strong>Halo! Saya Pak Wayan, pengelola Garasiku.</strong> Sebagai sesama pemilik mobil
+                                dan warga komplek perumahan ini, saya sangat memahami kekhawatiran saat mobil kesayangan
+                                harus diparkir di pinggir jalan terbuka terpapar panas terik, hujan lebat, resiko lecet
+                                tersenggol, hingga mengganggu kenyamanan jalan tetangga.
+                            </p>
+                            <p>
+                                Oleh karena itu, kami mendedikasikan area garasi beratap ini khusus untuk memberikan
+                                hunian parkir yang aman, tertib, dan nyaman. Setiap unit dirawat secara berkala dengan
+                                sirkulasi udara yang baik dan pencahayaan otomatis di malam hari.
+                            </p>
+                        </div>
+
+                        <!-- 3 Pilar Keunggulan / Nilai Pengelolaan -->
+                        <div class="about-pillars">
+                            <div class="about-pillar-card">
+                                <div class="pillar-icon pillar-blue">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <div class="pillar-content">
+                                    <h3>Aman &amp; Tenang</h3>
+                                    <p>Lingkungan perumahan asri, minim lalu-lalang orang asing, dan bebas risiko
+                                        gesekan di jalan umum komplek.</p>
+                                </div>
+                            </div>
+
+                            <div class="about-pillar-card">
+                                <div class="pillar-icon pillar-green">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="pillar-content">
+                                    <h3>Akses Mandiri 24 Jam</h3>
+                                    <p>Bebas masuk atau keluar kapan saja sesuai rutinitas Anda tanpa batasan jam malam.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="about-pillar-card">
+                                <div class="pillar-icon pillar-amber">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+                                        aria-hidden="true">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <div class="pillar-content">
+                                    <h3>Komunikasi Ramah &amp; Responsif</h3>
+                                    <p>Karena kami tinggal dekat lokasi komplek, segala pertanyaan, kebutuhan, atau
+                                        bantuan dapat saya tangani dengan cepat via WhatsApp.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quote Box dari Pengelola -->
+                        <div class="about-quote-box">
+                            <svg class="quote-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"
+                                aria-hidden="true">
+                                <path
+                                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                            </svg>
+                            <p class="quote-text">
+                                &ldquo;Bagi kami, mobil Anda adalah aset berharga yang layak mendapatkan perlindungan
+                                terbaik. Kami mengelola garasi ini dengan rasa tanggung jawab penuh layaknya merawat
+                                kendaraan keluarga kami sendiri.&rdquo;
+                            </p>
+                            <div class="quote-author">
+                                <strong>Pak Wayan</strong>
+                                <span>Pengelola Garasiku &amp; Warga Komplek Setempat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: UNIT GARASI KAMI & SLOT
+             ========================================== -->
+        <section class="content-section" id="unit-garasi">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Status Ketersediaan Slot</span>
+                    <h2 class="section-title">Pilihan Unit Garasi Kami</h2>
+                    <p class="section-subtitle">Pantau kapasitas dan ketersediaan slot parkir mobil di kedua unit garasi
+                        kami yang berada di dalam 1 komplek perumahan yang sama.</p>
+                </div>
+
+                <div class="units-grid">
+                    <!-- UNIT 1: GARASI 1 (10 Slot) -->
+                    <div class="unit-card" id="unitGarasi1">
+                        <div class="unit-card-header">
+                            <span class="unit-pill-tag">Unit Garasi 01</span>
+                            <div class="unit-status-counters">
+                                <span class="counter-badge available">
+                                    <span class="dot-indicator green"></span> <strong id="g1-avail-count">7</strong>
+                                    Kosong
+                                </span>
+                                <span class="counter-badge occupied">
+                                    <span class="dot-indicator muted"></span> <strong id="g1-occ-count">3</strong>
+                                    Terisi
+                                </span>
+                            </div>
+                        </div>
+
+                        <h3 class="unit-title">Garasi 1 (10 Slot Mobil)</h3>
+                        <p class="unit-description">Garasi mobil beratap dengan akses jalan depan lebar, bebas
+                            keluar-masuk kapan saja.</p>
+
+                        <!-- Visual Grid Slot Garasi 1 -->
+                        <div class="slots-visual-box" id="visualBoxGarasi1">
+                            <div class="slots-visual-header">
+                                <div class="visual-header-left">
+                                    <span class="visual-title">Denah Slot Garasi 1</span>
+                                    <span class="slot-type-note">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path
+                                                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.8 2 12.4V16c0 .6.4 1 1 1h2">
+                                            </path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                        </svg>
+                                        Khusus Mobil
+                                    </span>
+                                </div>
+                                <div class="slots-legend">
+                                    <span class="legend-item legend-kosong"><span class="legend-dot green"></span>
+                                        Kosong</span>
+                                    <span class="legend-item legend-terisi"><span class="legend-dot muted"></span>
+                                        Terisi</span>
+                                </div>
+                            </div>
+
+                            <!-- Container Grid Slot (Firebase Ready: data-garage & data-slot) -->
+                            <div class="slots-grid-container grid-10" id="gridGarasi1">
+                                <div class="slot-item status-kosong" id="slot-g1-01" data-garage="garasi-1"
+                                    data-slot="01" data-status="kosong">
+                                    <span class="slot-number">Slot 01</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-terisi" id="slot-g1-02" data-garage="garasi-1"
+                                    data-slot="02" data-status="terisi">
+                                    <span class="slot-number">Slot 02</span>
+                                    <span class="slot-status-pill">Terisi</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-03" data-garage="garasi-1"
+                                    data-slot="03" data-status="kosong">
+                                    <span class="slot-number">Slot 03</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-04" data-garage="garasi-1"
+                                    data-slot="04" data-status="kosong">
+                                    <span class="slot-number">Slot 04</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-terisi" id="slot-g1-05" data-garage="garasi-1"
+                                    data-slot="05" data-status="terisi">
+                                    <span class="slot-number">Slot 05</span>
+                                    <span class="slot-status-pill">Terisi</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-06" data-garage="garasi-1"
+                                    data-slot="06" data-status="kosong">
+                                    <span class="slot-number">Slot 06</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-07" data-garage="garasi-1"
+                                    data-slot="07" data-status="kosong">
+                                    <span class="slot-number">Slot 07</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-terisi" id="slot-g1-08" data-garage="garasi-1"
+                                    data-slot="08" data-status="terisi">
+                                    <span class="slot-number">Slot 08</span>
+                                    <span class="slot-status-pill">Terisi</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-09" data-garage="garasi-1"
+                                    data-slot="09" data-status="kosong">
+                                    <span class="slot-number">Slot 09</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g1-10" data-garage="garasi-1"
+                                    data-slot="10" data-status="kosong">
+                                    <span class="slot-number">Slot 10</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="unit-action-area">
+                            <a href="https://wa.me/6281916783714?text=Halo%20Pak%20Wayan,%20saya%20ingin%20tanya%20ketersediaan%20slot%20di%20Garasi%201%20(10%20Slot)"
+                                target="_blank" rel="noopener noreferrer" class="btn-check-slot">
+                                <span>Tanya Slot Garasi 1 via WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- UNIT 2: GARASI 2 (6 Slot) -->
+                    <div class="unit-card" id="unitGarasi2">
+                        <div class="unit-card-header">
+                            <span class="unit-pill-tag">Unit Garasi 02</span>
+                            <div class="unit-status-counters">
+                                <span class="counter-badge available">
+                                    <span class="dot-indicator green"></span> <strong id="g2-avail-count">4</strong>
+                                    Kosong
+                                </span>
+                                <span class="counter-badge occupied">
+                                    <span class="dot-indicator muted"></span> <strong id="g2-occ-count">2</strong>
+                                    Terisi
+                                </span>
+                            </div>
+                        </div>
+
+                        <h3 class="unit-title">Garasi 2 (6 Slot Mobil)</h3>
+                        <p class="unit-description">Garasi mobil beratap dengan akses jalan depan lebar, bebas
+                            keluar-masuk kapan saja.</p>
+
+                        <!-- Visual Grid Slot Garasi 2 -->
+                        <div class="slots-visual-box" id="visualBoxGarasi2">
+                            <div class="slots-visual-header">
+                                <div class="visual-header-left">
+                                    <span class="visual-title">Denah Slot Garasi 2</span>
+                                    <span class="slot-type-note">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path
+                                                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 2.8C2.1 11.2 2 11.8 2 12.4V16c0 .6.4 1 1 1h2">
+                                            </path>
+                                            <circle cx="7" cy="17" r="2"></circle>
+                                            <path d="M9 17h6"></path>
+                                            <circle cx="17" cy="17" r="2"></circle>
+                                        </svg>
+                                        Khusus Mobil
+                                    </span>
+                                </div>
+                                <div class="slots-legend">
+                                    <span class="legend-item legend-kosong"><span class="legend-dot green"></span>
+                                        Kosong</span>
+                                    <span class="legend-item legend-terisi"><span class="legend-dot muted"></span>
+                                        Terisi</span>
+                                </div>
+                            </div>
+
+                            <!-- Container Grid Slot (Firebase Ready: data-garage & data-slot) -->
+                            <div class="slots-grid-container grid-6" id="gridGarasi2">
+                                <div class="slot-item status-kosong" id="slot-g2-01" data-garage="garasi-2"
+                                    data-slot="01" data-status="kosong">
+                                    <span class="slot-number">Slot 01</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g2-02" data-garage="garasi-2"
+                                    data-slot="02" data-status="kosong">
+                                    <span class="slot-number">Slot 02</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-terisi" id="slot-g2-03" data-garage="garasi-2"
+                                    data-slot="03" data-status="terisi">
+                                    <span class="slot-number">Slot 03</span>
+                                    <span class="slot-status-pill">Terisi</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g2-04" data-garage="garasi-2"
+                                    data-slot="04" data-status="kosong">
+                                    <span class="slot-number">Slot 04</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                                <div class="slot-item status-terisi" id="slot-g2-05" data-garage="garasi-2"
+                                    data-slot="05" data-status="terisi">
+                                    <span class="slot-number">Slot 05</span>
+                                    <span class="slot-status-pill">Terisi</span>
+                                </div>
+                                <div class="slot-item status-kosong" id="slot-g2-06" data-garage="garasi-2"
+                                    data-slot="06" data-status="kosong">
+                                    <span class="slot-number">Slot 06</span>
+                                    <span class="slot-status-pill">Kosong</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="unit-action-area">
+                            <a href="https://wa.me/6281916783714?text=Halo%20Pak%20Wayan,%20saya%20ingin%20tanya%20ketersediaan%20slot%20di%20Garasi%202%20(6%20Slot)"
+                                target="_blank" rel="noopener noreferrer" class="btn-check-slot">
+                                <span>Tanya Slot Garasi 2 via WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: FASILITAS
+             ========================================== -->
+        <section class="content-section bg-alt" id="fasilitas">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Fasilitas Standar</span>
+                    <h2 class="section-title">Fasilitas Garasi yang Nyaman &amp; Praktis</h2>
+                    <p class="section-subtitle">Fasilitas lengkap dan seragam di Garasi 1 maupun Garasi 2 untuk
+                        kenyamanan kendaraan Anda.</p>
+                </div>
+
+                <div class="facilities-grid cards-grid">
+                    <div class="facility-item theme-amber">
+                        <div class="facility-icon zap">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3>Aliran Listrik</h3>
+                        <p>Sumber listrik untuk kebutuhan ringan seperti pengisian daya HP.</p>
+                    </div>
+
+                    <div class="facility-item theme-blue">
+                        <div class="facility-icon bulb">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 18h6"></path>
+                                <path d="M10 22h4"></path>
+                                <path
+                                    d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3>Lampu Otomatis</h3>
+                        <p>Menyala otomatis saat malam hari agar area garasi selalu terang dan nyaman.</p>
+                    </div>
+
+                    <div class="facility-item theme-water">
+                        <div class="facility-icon water">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                            </svg>
+                        </div>
+                        <h3>Air Keran Bersih</h3>
+                        <p>Air bersih siap pakai untuk mengelap kaca dan membersihkan bodi mobil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: CARA SEWA
+             ========================================== -->
+        <section class="content-section" id="cara-sewa">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Alur Cepat</span>
+                    <h2 class="section-title">3 Langkah Mudah Sewa Garasi</h2>
+                    <p class="section-subtitle">Proses pemesanan cepat tanpa ribet, kendaraan siap parkir dalam hitungan
+                        menit.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <h3>Pilih Unit &amp; Slot</h3>
+                        <p>Pilih Garasi 1 (10 slot) atau Garasi 2 (6 slot) di dalam komplek perumahan kami sesuai slot
+                            kosong yang Anda inginkan.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <h3>Verifikasi &amp; Konfirmasi</h3>
+                        <p>Hubungi Pengelola Garasi kami untuk cek ketersediaan slot dan penyerahan data verifikasi
+                            kepemilikan.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <h3>Akses Garasi Aktif</h3>
+                        <p>Konfirmasi slot garasi selesai dan mobil kesayangan Anda siap langsung diparkir dengan nyaman
+                            kapan saja!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: BANTUAN (FAQ)
+             ========================================== -->
+        <section class="content-section bg-alt" id="bantuan">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-badge">Pusat Bantuan</span>
+                    <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+                    <p class="section-subtitle">Temukan jawaban cepat seputar syarat, pembayaran, dan kenyamanan
+                        sewa garasi.</p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>Di mana lokasi kedua unit garasi ini berada?</h3>
+                        <p>Kedua unit garasi (Garasi 1 dan Garasi 2) berada di dalam satu komplek perumahan yang sama,
+                            Lingkungannya tenang, tertib, dan memiliki jalan komplek yang
+                            lebar untuk kenyamanan kendaraan Anda.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Berapa minimal durasi sewa garasi?</h3>
+                        <p>Minimal sewa adalah 1 bulan. Tersedia paket sewa 3 bulan, 6 bulan, hingga tahunan dengan
+                            potongan harga khusus.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Apakah garasi bisa diakses 24 jam bebas keluar-masuk?</h3>
+                        <p>Ya! Pagar garasi dapat langsung Anda buka dan tutup sendiri dengan mudah, sehingga bebas
+                            keluar-masuk mobil kapan saja 24 jam penuh tanpa batasan jam buka-tutup.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Fasilitas apa saja yang tersedia di dalam unit garasi?</h3>
+                        <p>Setiap unit garasi (Garasi 1 &amp; Garasi 2) dilengkapi fasilitas seragam: tersedianya aliran
+                            listrik untuk kebutuhan ringan seperti charger HP, lampu
+                            penerangan yang langsung menyala otomatis di malam hari, serta akses air
+                            keran untuk mengelap mobil.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SECTION: SEWA GARASI (CTA / BOOKING)
+             ========================================== -->
+        <section class="content-section cta-section" id="sewa">
+            <div class="section-container">
+                <div class="cta-box-inner">
+                    <h2 class="cta-title">Siap Parkir Mobil Lebih Nyaman &amp; Tenang?</h2>
+                    <p class="cta-desc">Slot garasi mobil di dalam komplek perumahan terbatas. Pesan garasi mobil
+                        pilihan Anda hari ini bersama Garasiku.</p>
+                    <div class="cta-actions">
+                        <a href="https://wa.me/6281916783714?text=Halo%20Pak%20Wayan,%20saya%20ingin%20sewa%20garasi"
+                            target="_blank" rel="noopener noreferrer" class="btn-primary-action"
+                            aria-label="Hubungi Pak Wayan Pengelola Garasi">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                            </svg>
+                            <span>Hubungi Pengelola Garasiku</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         FOOTER (MODERN & PROFESIONAL)
+         ========================================== -->
+    <footer class="main-footer" id="mainFooter">
+        <div class="footer-container">
+            <div class="footer-grid">
+
+                <!-- Kolom 1: Branding, Deskripsi & Status Layanan -->
+                <div class="footer-col footer-col-brand">
+                    <a href="#beranda" class="footer-brand" aria-label="Beranda Garasiku">
+                        <img src="public/branding/garasiku%20logo.webp" alt="Logo Garasiku" class="footer-logo"
+                            width="40" height="40">
+                        <div class="footer-brand-text">
+                            <span class="footer-brand-name">Garasiku</span>
+                            <span class="footer-brand-tagline">Sewa Garasi Nyaman &amp; Terpercaya</span>
+                        </div>
+                    </a>
+                    <p class="footer-desc">
+                        Solusi parkir mobil bulanan beratap teduh dan aman di dalam lingkungan komplek perumahan yang
+                        tenang dengan jalan leluasa dan pagar buka-tutup mandiri 24 jam.
+                    </p>
+                    <div class="footer-status-badge">
+                        <span class="status-pulse-dot"></span>
+                        <span>Layanan Garasi Aktif 24 Jam</span>
+                    </div>
+                </div>
+
+                <!-- Kolom 2: Navigasi Cepat Halaman -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Navigasi Halaman</h3>
+                    <ul class="footer-nav-list">
+                        <li><a href="#beranda" class="footer-link">Beranda</a></li>
+                        <li><a href="#tentang" class="footer-link">Tentang Garasiku</a></li>
+                        <li><a href="#unit-garasi" class="footer-link">Pilihan Unit Garasi</a></li>
+                        <li><a href="#fasilitas" class="footer-link">Fasilitas Garasi</a></li>
+                        <li><a href="#cara-sewa" class="footer-link">Cara Sewa Mudah</a></li>
+                        <li><a href="#bantuan" class="footer-link">Pusat Bantuan (FAQ)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 3: Spesifikasi Unit Garasi -->
+                <div class="footer-col">
+                    <h3 class="footer-heading">Kapasitas Unit</h3>
+                    <ul class="footer-info-list">
+                        <li>
+                            <strong class="info-title">Garasi 1 (10 Slot Mobil)</strong>
+                            <span>Muat City Car, MPV, hingga SUV</span>
+                        </li>
+                        <li>
+                            <strong class="info-title">Garasi 2 (6 Slot Mobil)</strong>
+                            <span>Muat City Car, MPV, hingga SUV</span>
+                        </li>
+                        <li>
+                            <strong class="info-title">Fasilitas Standar</strong>
+                            <span>Aliran listrik HP, lampu otomatis &amp; air keran</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kolom 4: Reservasi & Kontak Pengelola -->
+                <div class="footer-col footer-col-cta">
+                    <h3 class="footer-heading">Reservasi &amp; Tanya Jawab</h3>
+                    <p class="footer-cta-text">
+                        Ingin cek ketersediaan slot atau jadwalkan survei garasi langsung ke lokasi? Hubungi pengelola
+                        via WhatsApp:
+                    </p>
+                    <a href="https://wa.me/6281916783714?text=Halo%20Pak%20Wayan,%20saya%20ingin%20tanya%20sewa%20garasi"
+                        target="_blank" rel="noopener noreferrer" class="footer-btn-wa"
+                        aria-label="Hubungi Pak Wayan via WhatsApp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                        </svg>
+                        <span>Hubungi Pengelola Garasiku</span>
+                    </a>
+                    <span class="footer-note">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Survei lokasi dengan janji temu terlebih dahulu
+                    </span>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar: Copyright -->
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    &copy; <span id="currentYear">2026</span> <strong>Garasiku</strong>. Hak Cipta Dilindungi. Sewa
+                    Garasi
+                    Nyaman &amp; Terpercaya.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interaktif -->
+    <script src="script.js"></script>
+</body>
+
+</html>
