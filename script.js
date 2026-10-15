@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburgerBtn.setAttribute('aria-expanded', 'true');
         mobileNavMenu.removeAttribute('inert');
         mobileNavMenu.scrollTop = 0;
-        document.body.style.overflow = 'hidden';
+        // Catatan: Tidak mengunci overflow body agar halaman utama tetap dapat di-scroll
     };
 
     // Tutup Menu Mobile
@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hamburgerBtn.setAttribute('aria-expanded', 'false');
         mobileNavMenu.setAttribute('inert', '');
-        document.body.style.overflow = '';
     };
 
     // Toggle Menu Mobile
@@ -82,12 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event Listener Klik Backdrop Overlay
-    if (mobileBackdrop) {
-        mobileBackdrop.addEventListener('click', () => {
-            closeMobileMenu();
-        });
-    }
+    // Klik di luar menu mobile untuk menutup menu (dengan capture agar responsif tanpa menghalangi scroll)
+    document.addEventListener('click', (e) => {
+        if (hamburgerBtn && hamburgerBtn.classList.contains('active')) {
+            if (mobileNavMenu && !mobileNavMenu.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+                closeMobileMenu();
+            }
+        }
+    }, true);
 
     // Smooth Scroll untuk semua tautan internal anchor (#)
     allHashLinks.forEach(link => {
@@ -151,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('beranda'),
         document.getElementById('tentang'),
         document.getElementById('unit-garasi'),
-        document.getElementById('fasilitas'),
-        document.getElementById('cara-sewa'),
+        document.getElementById('galeri'),
         document.getElementById('bantuan')
     ].filter(Boolean);
 
@@ -237,22 +237,125 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================================================
-    // INTERAKTIVITAS DENAH SLOT (Klik slot untuk tanya langsung via WhatsApp)
+    // MODAL LIGHTBOX PRATINJAU FOTO GALERI (Navigasi Next / Back)
     // ==========================================================================
-    const allSlotItems = document.querySelectorAll('.slot-item');
-    allSlotItems.forEach(slot => {
-        slot.addEventListener('click', () => {
-            const status = slot.getAttribute('data-status');
-            const garage = slot.getAttribute('data-garage') === 'garasi-1' ? 'Garasi 1' : 'Garasi 2';
-            const slotName = slot.querySelector('.slot-number') ? slot.querySelector('.slot-number').textContent : 'Slot';
+    const galleryCards = document.querySelectorAll('.gallery-card');
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryModalImg = document.getElementById('galleryModalImg');
+    const galleryModalCounter = document.getElementById('galleryModalCounter');
+    const galleryModalClose = document.getElementById('galleryModalClose');
+    const galleryModalPrev = document.getElementById('galleryModalPrev');
+    const galleryModalNext = document.getElementById('galleryModalNext');
+    const galleryModalBackdrop = document.getElementById('galleryModalBackdrop');
 
-            if (status === 'kosong') {
-                const message = encodeURIComponent(`Halo Pak Wayan, saya ingin menanyakan ketersediaan ${slotName} di ${garage}. Apakah masih kosong?`);
-                const waUrl = `https://wa.me/6281916783714?text=${message}`;
-                window.open(waUrl, '_blank');
+    if (galleryModal && galleryCards.length > 0) {
+        let currentGalleryIndex = 0;
+
+        const updateModalContent = (index) => {
+            // Loop secara sirkular (dari foto terakhir ke pertama atau sebaliknya)
+            if (index < 0) {
+                index = galleryCards.length - 1;
+            } else if (index >= galleryCards.length) {
+                index = 0;
+            }
+            currentGalleryIndex = index;
+
+            const card = galleryCards[currentGalleryIndex];
+            const img = card.querySelector('img');
+
+            if (img && galleryModalImg) {
+                galleryModalImg.src = img.src;
+                galleryModalImg.alt = img.alt || 'Foto Garasiku';
+            }
+            if (galleryModalCounter) {
+                galleryModalCounter.textContent = `${currentGalleryIndex + 1} / ${galleryCards.length}`;
+            }
+        };
+
+        const openGalleryModal = (index) => {
+            updateModalContent(index);
+            galleryModal.classList.add('active');
+            galleryModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeGalleryModal = () => {
+            galleryModal.classList.remove('active');
+            galleryModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        };
+
+        const showNextPhoto = () => {
+            updateModalContent(currentGalleryIndex + 1);
+        };
+
+        const showPrevPhoto = () => {
+            updateModalContent(currentGalleryIndex - 1);
+        };
+
+        galleryCards.forEach((card, idx) => {
+            card.addEventListener('click', () => openGalleryModal(idx));
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openGalleryModal(idx);
+                }
+            });
+        });
+
+        if (galleryModalNext) {
+            galleryModalNext.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showNextPhoto();
+            });
+        }
+
+        if (galleryModalPrev) {
+            galleryModalPrev.addEventListener('click', (e) => {
+                e.stopPropagation();
+                showPrevPhoto();
+            });
+        }
+
+        if (galleryModalClose) {
+            galleryModalClose.addEventListener('click', closeGalleryModal);
+        }
+        if (galleryModalBackdrop) {
+            galleryModalBackdrop.addEventListener('click', closeGalleryModal);
+        }
+
+        // Navigasi Keyboard: Tombol Panah Kanan (Next), Panah Kiri (Back), dan Escape (Tutup)
+        document.addEventListener('keydown', (e) => {
+            if (!galleryModal.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                closeGalleryModal();
+            } else if (e.key === 'ArrowRight') {
+                showNextPhoto();
+            } else if (e.key === 'ArrowLeft') {
+                showPrevPhoto();
             }
         });
-    });
+
+        // Swipe gesture untuk layar sentuh / mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const imgWrap = galleryModal.querySelector('.gallery-modal-img-wrap');
+        if (imgWrap) {
+            imgWrap.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            imgWrap.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 45) {
+                    showNextPhoto();
+                } else if (touchEndX - touchStartX > 45) {
+                    showPrevPhoto();
+                }
+            }, { passive: true });
+        }
+    }
 });
 
 // ==============================================================================

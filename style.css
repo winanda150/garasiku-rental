@@ -358,7 +358,7 @@ body {
         overflow-y: auto;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
+        overscroll-behavior: auto;
         opacity: 1;
         visibility: visible;
     }
@@ -499,7 +499,7 @@ body {
         flex-shrink: 0;
     }
 
-    /* Backdrop Overlay */
+    /* Backdrop Overlay (pointer-events none agar halaman utama tetap dapat di-scroll saat menu terbuka) */
     .mobile-backdrop {
         display: block;
         position: fixed;
@@ -507,11 +507,12 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(15, 23, 42, 0.35);
+        background: rgba(15, 23, 42, 0.3);
         backdrop-filter: blur(2px);
         -webkit-backdrop-filter: blur(2px);
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
         transition: opacity 0.25s ease, visibility 0.25s;
         z-index: 998;
     }
@@ -519,6 +520,7 @@ body {
     .mobile-backdrop.open {
         opacity: 1;
         visibility: visible;
+        pointer-events: none;
     }
 }
 
@@ -918,7 +920,7 @@ body {
     align-items: center;
     gap: 12px;
     z-index: 2;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .about-badge-floating.badge-top {
@@ -931,13 +933,7 @@ body {
     left: -24px;
 }
 
-.about-image-wrapper:hover .about-badge-floating.badge-top {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
-}
-
-.about-image-wrapper:hover .about-badge-floating.badge-bottom {
-    transform: translateY(3px);
+.about-image-wrapper:hover .about-badge-floating {
     box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
 }
 
@@ -1019,11 +1015,10 @@ body {
     background: #f8fafc;
     border: 1px solid var(--border-subtle);
     border-radius: 16px;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .about-pillar-card:hover {
-    transform: translateY(-2px);
     border-color: rgba(0, 55, 176, 0.25);
     box-shadow: 0 8px 20px rgba(0, 55, 176, 0.06);
     background: #ffffff;
@@ -1325,7 +1320,7 @@ body {
     border: 1.5px dashed #cbd5e1;
     border-radius: 18px;
     padding: 18px;
-    margin-bottom: 22px;
+    margin-bottom: 0;
 }
 
 .slots-visual-header {
@@ -1455,7 +1450,7 @@ body {
     background: #ffffff;
     border: 1.5px solid #86efac;
     box-shadow: 0 2px 5px rgba(0, 108, 73, 0.05);
-    cursor: pointer;
+    cursor: default;
 }
 
 .slot-item.status-kosong .slot-number {
@@ -1470,8 +1465,6 @@ body {
 .slot-item.status-kosong:hover {
     border-color: var(--brand-green);
     background: #f0fdf4;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 108, 73, 0.16);
 }
 
 /* Status: Terisi (Occupied) */
@@ -1479,7 +1472,7 @@ body {
     background: #f8fafc;
     border: 1.5px solid #e2e8f0;
     opacity: 0.85;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .slot-item.status-terisi .slot-number {
@@ -1532,6 +1525,13 @@ body {
     }
 }
 
+@media (max-width: 680px) {
+    .slots-grid-container.grid-10 {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+}
+
 @media (max-width: 480px) {
     .unit-card {
         padding: 24px 18px;
@@ -1545,9 +1545,13 @@ body {
         padding: 14px 12px;
     }
 
+    .slots-grid-container.grid-10 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .slot-item {
-        font-size: 0.72rem;
-        padding: 9px 3px;
+        font-size: 0.74rem;
+        padding: 9px 5px;
     }
 
     .slots-grid-container {
@@ -1708,6 +1712,426 @@ body {
 }
 
 
+/* ===================================================
+   SECTION: GALERI FOTO REAL GARASIKU
+   =================================================== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.gallery-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.gallery-card:focus-visible {
+    box-shadow: 0 0 0 3px var(--primary-blue), 0 12px 32px rgba(0, 55, 176, 0.2);
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
+}
+
+.gallery-img-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #1e293b;
+}
+
+.gallery-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-card:hover .gallery-img-wrapper img {
+    transform: scale(1.08);
+}
+
+.gallery-card-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 20px;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0) 40%, rgba(15, 23, 42, 0.88) 100%);
+    color: #ffffff;
+    transition: background 0.3s ease;
+}
+
+.gallery-card:hover .gallery-overlay {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 20%, rgba(15, 23, 42, 0.94) 100%);
+}
+
+.gallery-zoom-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-card:hover .gallery-zoom-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.gallery-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 4px;
+    letter-spacing: -0.2px;
+    line-height: 1.3;
+}
+
+.gallery-card-desc {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* Lightbox Modal (Clean Photo View) */
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.gallery-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.gallery-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 15, 29, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    cursor: pointer;
+}
+
+/* 1. Counter: Pojok Kiri Atas (Tanpa Box) */
+.gallery-modal-counter {
+    position: absolute;
+    top: 28px;
+    left: 32px;
+    z-index: 30;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.95);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    user-select: none;
+    pointer-events: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* 2. Tombol Close (X): Pojok Kanan Atas (Tanpa Box) */
+.gallery-modal-close {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    z-index: 30;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7));
+    pointer-events: auto;
+}
+
+.gallery-modal-close svg {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.3;
+}
+
+.gallery-modal-close:hover {
+    color: #ffffff;
+    background: transparent;
+}
+
+/* 3. Tombol Next & Back: Berada di Luar Gambar (Sisi Kiri & Kanan Layar) */
+.gallery-modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+}
+
+.gallery-modal-nav:hover {
+    background: rgba(255, 255, 255, 0.24);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-modal-nav:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.gallery-modal-prev {
+    left: 28px;
+}
+
+.gallery-modal-next {
+    right: 28px;
+}
+
+/* 4. Area Gambar Murni (Tanpa Teks / Keterangan) */
+.gallery-modal-img-wrap {
+    position: relative;
+    z-index: 5;
+    max-width: calc(100vw - 200px);
+    max-height: 86vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.gallery-modal-img {
+    max-width: 100%;
+    max-height: 86vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: block;
+    user-select: none;
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-modal.active .gallery-modal-img {
+    transform: scale(1);
+}
+
+/* Tablet & Mobile (max-width: 1150px) */
+@media (max-width: 1150px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+
+    .gallery-modal-counter {
+        top: 22px;
+        left: 24px;
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    .gallery-modal-close {
+        top: 18px;
+        right: 24px;
+        width: 42px;
+        height: 42px;
+    }
+
+    .gallery-modal-close svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* Tombol Navigasi Next & Prev di Tablet: Transparan, Hanya Terlihat Ikon Kanan & Kiri */
+    .gallery-modal-nav {
+        width: 52px;
+        height: 64px;
+        background: transparent;
+        border: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        box-shadow: none;
+        color: rgba(255, 255, 255, 0.95);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.85));
+        padding: 0;
+    }
+
+    .gallery-modal-nav:hover,
+    .gallery-modal-nav:active {
+        background: transparent;
+        border-color: transparent;
+        color: #ffffff;
+        box-shadow: none;
+        transform: translateY(-50%);
+    }
+
+    .gallery-modal-nav svg {
+        width: 36px;
+        height: 36px;
+        stroke-width: 2.6;
+    }
+
+    .gallery-modal-prev {
+        left: 10px;
+    }
+
+    .gallery-modal-next {
+        right: 10px;
+    }
+
+    /* Gambar Modal di Tablet: Full 100% Layar (Tanpa Bayangan Gelap) */
+    .gallery-modal-img-wrap {
+        width: 100%;
+        max-width: 100vw;
+        max-height: 88vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    .gallery-modal-img {
+        width: 100%;
+        max-width: 100vw;
+        height: auto;
+        max-height: 88vh;
+        object-fit: contain;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+
+/* Mobile Khusus (max-width: 768px) */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .gallery-overlay {
+        padding: 18px 16px;
+    }
+
+    .gallery-card-title {
+        font-size: 0.98rem;
+    }
+
+    .gallery-card-desc {
+        font-size: 0.78rem;
+    }
+
+    .gallery-modal-counter {
+        top: 18px;
+        left: 20px;
+        font-size: 0.95rem;
+    }
+
+    .gallery-modal-close {
+        top: 14px;
+        right: 18px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .gallery-modal-close svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .gallery-modal-nav {
+        width: 44px;
+        height: 56px;
+    }
+
+    .gallery-modal-nav svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gallery-modal-prev {
+        left: 6px;
+    }
+
+    .gallery-modal-next {
+        right: 6px;
+    }
+}
+
 /* Steps Grid */
 .steps-grid {
     display: grid;
@@ -1728,6 +2152,11 @@ body {
     border-color: var(--primary-blue);
     background: #ffffff;
     transform: translateY(-4px);
+}
+
+.content-section.bg-alt .step-card {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
 }
 
 .step-num {
