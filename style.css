@@ -2317,13 +2317,8 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
     margin-bottom: 16px;
-    transition: var(--transition);
-}
-
-.footer-brand:hover {
-    opacity: 0.92;
+    user-select: none;
 }
 
 .footer-logo {
